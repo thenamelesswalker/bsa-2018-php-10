@@ -11,22 +11,21 @@ class RateChanged extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
+    protected $user;
 
+    protected $currency;
+
+    protected $oldRate;
+
+    public function __construct($user, $currency, $oldRate)
+    {
+        $this->user = $user;
+        $this->currency = $currency;
+        $this->oldRate = $oldRate;
     }
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
     public function build()
     {
+        return view('rate_changed',['user' => $this->user, 'currency' => $this->currency, 'oldRate' => $this->oldRate]);
     }
 }
